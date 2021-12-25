@@ -4,10 +4,11 @@
         <meta charset="utf-8">
         <title>Rock, Paper, Scissors!</title>
         <link rel="stylesheet" href="styles.css">
-        <!-- <script src="script.js"></script> -->
+        <script src="script.js" defer></script>
     </head>
     <body>
     
+    <h1>Rock, Paper, Scissors!</h1>
     <div class="gameArea">
         <div class="btnCont">
             <img src="images/rock.png" class="rock btn">
@@ -15,12 +16,25 @@
             <img src="images/scissors.png" class="scissor btn">
         </div>
         <div class="pCont">
-            <img src="images/pAv.jpg" class="pAv">
+            <div class="pHeader">
+                <img src="images/pAv.jpg" class="pAv">
+                <div class="pScoreBoard">
+                    <img src="images/scoreboard/0.png" class="pFirstDig digit">
+                    <img src="images/scoreboard/3.png" class="pFirstDig digit">
+                </div>
+            </div>
             <div class="pSelect"></div>
             <div class="pScore"></div>
         </div>
+        <p class="vs">Vs</p>
         <div class="cCont">
-            <img src="images/cAv.jpeg" class="cAv">
+            <div class="cHeader">
+                <div class="pScoreBoard">
+                    <img src="images/scoreboard/0.png" class="cFirstDig digit">
+                    <img src="images/scoreboard/1.png" class="cFirstDig digit">
+                </div>
+                <img src="images/cAv.png" class="cAv">
+            </div>
             <div class="cSelect"></div>
             <div class="cScore"></div>
         </div>

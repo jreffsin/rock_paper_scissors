@@ -1,6 +1,7 @@
 body {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -48,23 +49,24 @@ body {
 }
 
 .cAv {
-    width: 150px;
+    width: 120px;
     border-radius: 20px;
-    margin-right: 20px;
 }
 
 .pSelect {
-    border: 3px solid red;
+    border: 3px solid rgb(40, 90, 102);
     border-radius: 20px;
     width: 300px;
     height: 300px;
-    margin-right: 150px;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
 .cSelect {
-    border: 3px solid red;
+    border: 3px solid rgb(40, 90, 102);
     border-radius: 20px;
     width: 300px;
     height: 300px;
@@ -72,3 +74,33 @@ body {
     margin-right: 40px;
 }
 
+.vs {
+    font-size: 36px;
+    margin: 0 25px 150px 25px;
+}
+
+.pHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.digit {
+    height: 50px;
+    border-radius: 5px;
+}
+
+.pScoreBoard {
+    margin-left: 20px;
+}
+
+.selectImg {
+    width: 150px;
+}
