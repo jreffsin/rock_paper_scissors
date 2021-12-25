@@ -1,0 +1,74 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameArea {
+    border: 3px solid black;
+    border-radius: 20px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.btnCont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100px;
+}
+
+.pCont {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.cCont {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.btn {
+    width: 75px;
+    border-radius: 150px;
+    margin: 10px;
+}
+
+.pAv {
+    width: 100px;
+    border-radius: 20px;
+    margin-left: 20px;
+}
+
+.cAv {
+    width: 150px;
+    border-radius: 20px;
+    margin-right: 20px;
+}
+
+.pSelect {
+    border: 3px solid red;
+    border-radius: 20px;
+    width: 300px;
+    height: 300px;
+    margin-right: 150px;
+    margin-bottom: 20px;
+}
+
+
+.cSelect {
+    border: 3px solid red;
+    border-radius: 20px;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 20px;
+    margin-right: 40px;
+}
+

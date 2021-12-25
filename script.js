@@ -3,10 +3,13 @@
 //declare function to determine player selection
 function getPlayerSelection(){
     let playerSelection = prompt("Enter selection: Rock, Paper, Scissors").toLowerCase();
+
+    //check for invalid inputs
     if (!(playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissors")) {
         console.log("You must enter either 'Rock' 'Paper' or 'Scissors'");
         return;
     }
+
     return playerSelection;
 }
 
