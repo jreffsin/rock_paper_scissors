@@ -1,5 +1,15 @@
 //This is a script to play a simple player vs computer game of rock paper scissors
 
+//store pSelect img element in variable
+let pSelectImg = document.querySelector('.pSelectImg');
+
+//store the player select buttons into variable
+let buttons = document.querySelectorAll('.btn');
+console.log(buttons);
+
+//add click event listener to selection buttons
+buttons.forEach(button => button.addEventListener("click", playRound));
+
 //declare function to determine random computer selection
 function getComputerSelection(){
     const possibleThrows = ["rock", "paper", "scissors"];
@@ -7,35 +17,37 @@ function getComputerSelection(){
     return computerSelection;
 }
 
-//declare function to determine player selection
-function playerSelects(e){
+//declare function to determine and show player selection
+function getPlayerSelection(e){
 
-    //select the player selection field
-    const pSelect = document.querySelector('.pSelect');
-
-    //create an img element that will go in player selection field, give it styling class
-    let pSelectImg = document.createElement('img')
-    pSelectImg.classList.add('selectImg');
-
-    //determine player selection
+     //determine player selection and change pSelectImg to appropriate icon
     if (e.target.classList.contains("rock")){
         pSelectImg.src = "images/rock.png";
+        buttons[0].style.boxShadow = "0 0 15px green";
+
     } else if (e.target.classList.contains("paper")){
         pSelectImg.src = "images/paper.png";
+        buttons[1].style.boxShadow = "0 0 15px green";
     }
-    else pSelectImg.src = "images/scissors.png";
+    else {
+        pSelectImg.src = "images/scissors.png";
+        buttons[2].style.boxShadow = "0 0 15px green";
+    }
+}
 
-    pSelect.append(pSelectImg);
+//declare function to determine player selection
+function playRound(e){
 
-    // const pSelect = document.querySelector(.pSelect);
+    getPlayerSelection(e);
 
-    //place player selection into player selection area
+    //play rock/paper/scissors animation
+
+    //check for winner
+
 };
 
-//pass the player select buttons into variable
-let buttons = document.querySelectorAll('.btn');
-//add click event listener to selection buttons
-buttons.forEach(button => button.addEventListener("click", playerSelects));
+
+
 //when player makes selection return that selection
 
 
@@ -56,12 +68,6 @@ buttons.forEach(button => button.addEventListener("click", playerSelects));
 //     return playerSelection;
 // }
 
-//declare function to determine random computer selection
-function getComputerSelection(){
-    const possibleThrows = ["rock", "paper", "scissors"];
-    let computerSelection = possibleThrows[Math.floor(Math.random() * 3)];
-    return computerSelection;
-}
 
 // //declare function that compares player selection to computer selection and returns winner (tie, player, computer)
 // function comparePlayerToComputer(playerSelection, computerSelection){

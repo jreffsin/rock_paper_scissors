@@ -39,7 +39,10 @@ body {
 .btn {
     width: 75px;
     border-radius: 150px;
-    margin: 10px;
+    border: 3px solid transparent;
+    margin: 6px;
+    transition: box-shadow .4s;
+    box-shadow: 0 0 15px transparent;
 }
 
 .pAv {
@@ -72,6 +75,9 @@ body {
     height: 300px;
     margin-bottom: 20px;
     margin-right: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .vs {
@@ -103,4 +109,8 @@ body {
 
 .selectImg {
     width: 150px;
+}
+
+.cSelectImg {
+    width: 200px;
 }
