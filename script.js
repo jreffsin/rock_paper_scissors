@@ -7,6 +7,12 @@ let cSelectImg = document.querySelector('.cSelectImg');
 
 let header = document.querySelector(".header");
 
+let pScore = document.querySelector(".pSecondDig");
+let cScore = document.querySelector(".cSecondDig");
+
+let playerScore = 0;
+let compScore = 0;
+
 //store the player select buttons into variable
 let buttons = document.querySelectorAll('.btn');
 console.log(buttons);
@@ -49,12 +55,13 @@ function getComputerSelection(){
 
 //declare function to determine and show player selection
 function getPlayerSelection(e){
+    // let timer = true;
 
      //determine player selection and change pSelectImg to appropriate icon with styling
     if (e.target.classList.contains("rock")){
-        pSelectImg.src = "images/rock.png";
         buttons[0].style.boxShadow = "0 0 15px green";
         buttons[0].style.transform = "scale(1.1)";
+        pSelectImg.src = "images/rock.png";
         return 'rock';
 
     } else if (e.target.classList.contains("paper")){
@@ -85,6 +92,18 @@ function displayWinnerText (winner){
     }
 }
 
+//declare adjust score function
+function adjustScore(winner){
+    if (winner == "player"){
+        playerScore++;
+        pScore.src = `images/scoreboard/${playerScore}.png`
+    } else if (winner == "computer"){
+        compScore++;
+        cScore.src = `images/scoreboard/${compScore}.png`
+    }
+    return;
+}
+
 //declare function to determine player selection
 function playRound(e){
 
@@ -96,6 +115,12 @@ function playRound(e){
 
     displayWinnerText(winner);
 
+    adjustScore(winner);
+
+    // resetStyling();
+
+    //checkForEnd();
+
 };
 
 
@@ -106,37 +131,6 @@ function playRound(e){
 //when player makes a selection, put their selection in player selection box
 //put computer selection in computer selection box
  
-
-// //declare function to determine player selection
-// function getPlayerSelection(){
-//     let playerSelection = prompt("Enter selection: Rock, Paper, Scissors").toLowerCase();
-
-//     //check for invalid inputs
-//     if (!(playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissors")) {
-//         console.log("You must enter either 'Rock' 'Paper' or 'Scissors'");
-//         return;
-//     }
-
-//     return playerSelection;
-// }
-
-
-//declare function that compares player selection to computer selection and returns winner (tie, player, computer)
-function comparePlayerToComputer(playerSelection, computerSelection){
-    //check for tie case
-    if (playerSelection == computerSelection){
-        return "tie";
-    }
-    //check for player win
-    if (
-        (playerSelection == "rock" && computerSelection == "scissors") || 
-        (playerSelection == "scissors" && computerSelection == "paper") || 
-        (playerSelection == "paper" && computerSelection == "rock")){
-            return "player";
-        }
-    //else computer wins
-    return "computer";
-}
 
 // // declare function that displays winner
 // function displayWinner(winner, playerSelection, computerSelection){
