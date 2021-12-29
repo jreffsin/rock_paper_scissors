@@ -9,6 +9,8 @@ let header = document.querySelector(".header");
 
 let pScore = document.querySelector(".pSecondDig");
 let cScore = document.querySelector(".cSecondDig");
+let pScoreBoard = document.querySelector(".pScoreBoard");
+let cScoreBoard = document.querySelector(".cScoreBoard");
 
 let playerScore = 0;
 let compScore = 0;
@@ -50,6 +52,9 @@ function getComputerSelection(){
     else {
         cSelectImg.src = "images/scissors.png";
     }
+    setTimeout(() => {
+        cSelectImg.src = "";
+    }, 1400);
     return computerSelection;
 }
 
@@ -59,21 +64,37 @@ function getPlayerSelection(e){
 
      //determine player selection and change pSelectImg to appropriate icon with styling
     if (e.target.classList.contains("rock")){
-        buttons[0].style.boxShadow = "0 0 15px green";
-        buttons[0].style.transform = "scale(1.1)";
+        // buttons[0].style.boxShadow = "0 0 15px green";
+        buttons[0].style.transform = "scale(1.2)";
+        setTimeout(() => {
+            buttons[0].style.transform = "scale(1)";
+        }, 600);
         pSelectImg.src = "images/rock.png";
+        setTimeout(() => {
+            pSelectImg.src = "";
+        }, 1400);
         return 'rock';
 
     } else if (e.target.classList.contains("paper")){
         pSelectImg.src = "images/paper.png";
-        buttons[1].style.boxShadow = "0 0 15px green";
-        buttons[1].style.transform = "scale(1.1)";
+        buttons[1].style.transform = "scale(1.2)";
+        setTimeout(() => {
+            buttons[1].style.transform = "scale(1)";
+        }, 600);
+        setTimeout(() => {
+            pSelectImg.src = "";
+        }, 1400);
         return 'paper';
     }
     else {
         pSelectImg.src = "images/scissors.png";
-        buttons[2].style.boxShadow = "0 0 15px green";
-        buttons[2].style.transform = "scale(1.1)";
+        buttons[2].style.transform = "scale(1.2)";
+        setTimeout(() => {
+            buttons[2].style.transform = "scale(1)";
+        }, 600);
+        setTimeout(() => {
+            pSelectImg.src = "";
+        }, 1400);
         return 'scissors';
     }
 }
@@ -81,31 +102,57 @@ function getPlayerSelection(e){
 //declare function to display winner text
 function displayWinnerText (winner){
     if (winner == 'player'){
-        header.innerText = "Player Wins!"
+        header.innerText = "Player Wins!";
         header.style.color = "black";
     } else if (winner == 'computer'){
-        header.innerText = "Computer Wins!"
+        header.innerText = "Computer Wins!";
         header.style.color = "black";
     } else {
-        header.innerText = "Tie!"
+        header.innerText = "Tie!";
         header.style.color = "black";
     }
+    setTimeout(()=>{
+        header.style.color = "transparent";
+    }, 1400);
 }
 
 //declare adjust score function
 function adjustScore(winner){
     if (winner == "player"){
         playerScore++;
-        pScore.src = `images/scoreboard/${playerScore}.png`
+        // pScore.src = `images/scoreboard/${playerScore}.png`;
+        setTimeout(() => {
+            pScore.src = `images/scoreboard/${playerScore}.png`;
+            pScoreBoard.style.boxShadow = "0 0 15px green";
+        }, 1400);
+        // pScoreBoard.style.boxShadow = "0 0 15px green";
+        setTimeout(() => {
+            pScoreBoard.style.boxShadow = "0 0 0 green";
+        }, 1800)
     } else if (winner == "computer"){
         compScore++;
-        cScore.src = `images/scoreboard/${compScore}.png`
+        // cScore.src = `images/scoreboard/${compScore}.png`;
+        setTimeout(() => {
+            cScore.src = `images/scoreboard/${compScore}.png`;
+            cScoreBoard.style.boxShadow = "0 0 15px green";
+        }, 1400);
+        // cScoreBoard.style.boxShadow = "0 0 15px green";
+        setTimeout(() => {
+            cScoreBoard.style.boxShadow = "0 0 0 green";
+        }, 1800)
     }
     return;
 }
 
 //declare function to determine player selection
 function playRound(e){
+
+    // remove click event listener and replace it after animation has concluded
+    // so that click event only happens once per animation
+    buttons.forEach(button => button.removeEventListener("click", playRound));
+    setTimeout(() => {
+        buttons.forEach(button => button.addEventListener("click", playRound));
+    }, 1800);
 
     let pSelection = getPlayerSelection(e);
 
@@ -116,8 +163,6 @@ function playRound(e){
     displayWinnerText(winner);
 
     adjustScore(winner);
-
-    // resetStyling();
 
     //checkForEnd();
 
