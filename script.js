@@ -1,5 +1,10 @@
 //This is a script to play a simple player vs computer game of rock paper scissors
 
+let popUp = document.querySelector('.popUp');
+let popUpText = document.querySelector('.popUpText');
+let popUpButton = document.querySelector('.popUpButton');
+let gameArea = document.querySelector('.gameArea');
+
 //store pSelect img element in variable
 let pSelectImg = document.querySelector('.pSelectImg');
 
@@ -144,15 +149,52 @@ function adjustScore(winner){
     return;
 }
 
+//declare function to reset game
+function resetGame(){
+    playerScore = 0;
+    compScore = 0;
+    popUp.style.display = 'none';
+    gameArea.style.display = 'flex';
+    pScore.src = 'images/scoreboard/0.png';
+    cScore.src = 'images/scoreboard/0.png';
+    buttons.forEach(button => button.addEventListener("click", playRound));
+}
+
+function checkForWinner(){
+    if (playerScore === 3){
+        popUpText.innerText = "You win! Play again?"
+        popUpButton.innerText = "Click to Play Again"
+        popUpButton.addEventListener('click', resetGame);
+        setTimeout(() => {
+            popUp.style.display = 'flex';
+            gameArea.style.display = 'none';
+        }, 3000);
+        // buttons.forEach(button => button.removeEventListener("click", playRound));
+    } else if (compScore === 3){
+        popUpText.innerText = "Computer wins. Play again?"
+        popUpButton.innerText = "Click to Play Again"
+        popUpButton.addEventListener('click', resetGame);
+        setTimeout(() => {
+            popUp.style.display = 'flex';
+            gameArea.style.display = 'none';
+        }, 3000);
+        // buttons.forEach(button => button.removeEventListener("click", playRound));
+    } else{
+        setTimeout(() => {
+            buttons.forEach(button => button.addEventListener("click", playRound));
+        }, 1800);
+    }
+}
+
 //declare function to determine player selection
 function playRound(e){
 
     // remove click event listener and replace it after animation has concluded
     // so that click event only happens once per animation
     buttons.forEach(button => button.removeEventListener("click", playRound));
-    setTimeout(() => {
-        buttons.forEach(button => button.addEventListener("click", playRound));
-    }, 1800);
+    // setTimeout(() => {
+    //     buttons.forEach(button => button.addEventListener("click", playRound));
+    // }, 1800);
 
     let pSelection = getPlayerSelection(e);
 
@@ -164,7 +206,8 @@ function playRound(e){
 
     adjustScore(winner);
 
-    //checkForEnd();
+    // setTimeout(checkForWinner, 180);
+    checkForWinner();
 
 };
 
