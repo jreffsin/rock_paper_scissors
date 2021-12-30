@@ -16,7 +16,7 @@ body {
 .gameArea {
     border: 3px solid black;
     border-radius: 20px;
-    display: flex;
+    display: none;
     align-items: flex-end;
     margin: 0 50px 300px 0;
 }
@@ -27,7 +27,7 @@ body {
     justify-content: center;
     flex-direction: column;
     margin-bottom: 20px;
-    width: 100px;
+    width: 115px;
 }
 
 .pCont {
@@ -35,6 +35,7 @@ body {
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
+    margin-right: 30px;
 }
 
 .cCont {
@@ -45,13 +46,19 @@ body {
 }
 
 .btn {
-    width: 75px;
-    border-radius: 150px;
+    height: 75px;
+    /* border-radius: 150px; */
     border: 3px solid transparent;
     margin: 6px;
     transition: box-shadow .4s;
     transition: transform .4s;
     box-shadow: 0 0 15px transparent;
+    cursor: pointer;
+    /* padding: 10px; */
+}
+
+.paper.btn {
+    height: 83px;
 }
 
 .pAv {
@@ -127,7 +134,7 @@ body {
 }
 
 .selectImg {
-    width: 150px;
+    height: 150px;
 }
 
 .popUp {
@@ -138,7 +145,7 @@ body {
     margin-top: 155px;
     margin-right: 48px;
     border-radius: 20px;
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -150,6 +157,7 @@ body {
     text-align: center;
     color: papayawhip;
     cursor: default;
+    margin-top: 40px;
 }
 
 .popUpButton {

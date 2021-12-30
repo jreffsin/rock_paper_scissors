@@ -1,31 +1,34 @@
-//This is a script to play a simple player vs computer game of rock paper scissors
+//This is a program to play a simple player vs computer game of rock paper scissors
 
+//store important html elements in variables
+//popup and gamearea
 let popUp = document.querySelector('.popUp');
 let popUpText = document.querySelector('.popUpText');
 let popUpButton = document.querySelector('.popUpButton');
 let gameArea = document.querySelector('.gameArea');
 
-//store pSelect img element in variable
+//image elements for round selection
 let pSelectImg = document.querySelector('.pSelectImg');
-
 let cSelectImg = document.querySelector('.cSelectImg');
 
-let header = document.querySelector(".header");
+//header element for displaying round outcome
+let header = document.querySelector('.header');
 
+//score elements
 let pScore = document.querySelector(".pSecondDig");
 let cScore = document.querySelector(".cSecondDig");
 let pScoreBoard = document.querySelector(".pScoreBoard");
 let cScoreBoard = document.querySelector(".cScoreBoard");
 
+//player buttons
+let buttons = document.querySelectorAll('.btn');
+
+//initialize playerScore and compScore variables
 let playerScore = 0;
 let compScore = 0;
 
-//store the player select buttons into variable
-let buttons = document.querySelectorAll('.btn');
-console.log(buttons);
-
-//add click event listener to selection buttons
-buttons.forEach(button => button.addEventListener("click", playRound));
+//add event listener to popup to allow game to start
+popUpButton.addEventListener('click', resetGame);
 
 //declare function that compares player selection to computer selection and returns winner (tie, player, computer)
 function comparePlayerToComputer(playerSelection, computerSelection){
@@ -50,12 +53,12 @@ function getComputerSelection(){
     let computerSelection = possibleThrows[Math.floor(Math.random() * 3)];
 
     if (computerSelection === "rock"){
-        cSelectImg.src = "images/rock.png";
+        cSelectImg.src = "images/rock_flip.png";
     } else if (computerSelection === "paper"){
-        cSelectImg.src = "images/paper.png";
+        cSelectImg.src = "images/paper_flip.png";
     }
     else {
-        cSelectImg.src = "images/scissors.png";
+        cSelectImg.src = "images/scissors_flip.png";
     }
     setTimeout(() => {
         cSelectImg.src = "";
@@ -107,13 +110,13 @@ function getPlayerSelection(e){
 //declare function to display winner text
 function displayWinnerText (winner){
     if (winner == 'player'){
-        header.innerText = "Player Wins!";
+        header.innerText = "You Score";
         header.style.color = "black";
     } else if (winner == 'computer'){
-        header.innerText = "Computer Wins!";
+        header.innerText = "Computer Scores";
         header.style.color = "black";
     } else {
-        header.innerText = "Tie!";
+        header.innerText = "Tie";
         header.style.color = "black";
     }
     setTimeout(()=>{
@@ -123,25 +126,22 @@ function displayWinnerText (winner){
 
 //declare adjust score function
 function adjustScore(winner){
+    //increment wither playerScore or compScore and style change
     if (winner == "player"){
         playerScore++;
-        // pScore.src = `images/scoreboard/${playerScore}.png`;
         setTimeout(() => {
             pScore.src = `images/scoreboard/${playerScore}.png`;
             pScoreBoard.style.boxShadow = "0 0 15px green";
         }, 1400);
-        // pScoreBoard.style.boxShadow = "0 0 15px green";
         setTimeout(() => {
             pScoreBoard.style.boxShadow = "0 0 0 green";
         }, 1800)
     } else if (winner == "computer"){
         compScore++;
-        // cScore.src = `images/scoreboard/${compScore}.png`;
         setTimeout(() => {
             cScore.src = `images/scoreboard/${compScore}.png`;
             cScoreBoard.style.boxShadow = "0 0 15px green";
         }, 1400);
-        // cScoreBoard.style.boxShadow = "0 0 15px green";
         setTimeout(() => {
             cScoreBoard.style.boxShadow = "0 0 0 green";
         }, 1800)
@@ -160,41 +160,50 @@ function resetGame(){
     buttons.forEach(button => button.addEventListener("click", playRound));
 }
 
+//declare function to check for winner
 function checkForWinner(){
     if (playerScore === 3){
         popUpText.innerText = "You win! Play again?"
         popUpButton.innerText = "Click to Play Again"
         popUpButton.addEventListener('click', resetGame);
+
+        //after time delay open popup and hide gamearea
         setTimeout(() => {
             popUp.style.display = 'flex';
             gameArea.style.display = 'none';
-        }, 3000);
-        // buttons.forEach(button => button.removeEventListener("click", playRound));
+        }, 2800);
+
     } else if (compScore === 3){
         popUpText.innerText = "Computer wins. Play again?"
         popUpButton.innerText = "Click to Play Again"
         popUpButton.addEventListener('click', resetGame);
+
+        //after time delay open popup and hide gamearea
         setTimeout(() => {
             popUp.style.display = 'flex';
             gameArea.style.display = 'none';
-        }, 3000);
-        // buttons.forEach(button => button.removeEventListener("click", playRound));
-    } else{
+        }, 2800);
+
+    } else {
+
+        //if no winner, add click event listener back to player selection buttons
         setTimeout(() => {
             buttons.forEach(button => button.addEventListener("click", playRound));
         }, 1800);
     }
 }
 
-//declare function to determine player selection
-function playRound(e){
-
-    // remove click event listener and replace it after animation has concluded
+//declare removeClickEvent function
+function removeClickEvent(){
+    // remove click event listener
     // so that click event only happens once per animation
     buttons.forEach(button => button.removeEventListener("click", playRound));
-    // setTimeout(() => {
-    //     buttons.forEach(button => button.addEventListener("click", playRound));
-    // }, 1800);
+}
+
+//declare function to play a round once player makes their selection
+function playRound(e){
+
+    removeClickEvent();
 
     let pSelection = getPlayerSelection(e);
 
@@ -206,86 +215,9 @@ function playRound(e){
 
     adjustScore(winner);
 
-    // setTimeout(checkForWinner, 180);
     checkForWinner();
 
 };
-
-
-
-//when player makes selection return that selection
-
-
-//when player makes a selection, put their selection in player selection box
-//put computer selection in computer selection box
- 
-
-// // declare function that displays winner
-// function displayWinner(winner, playerSelection, computerSelection){
-//     if (winner == "tie") {
-//         console.log(`No winner! Player and Computer both threw ${playerSelection}.`);
-//         return;
-//     } else if (winner == "player") {
-//         console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
-//         return;
-//     }
-//     console.log(`You lose! ${computerSelection} beats ${playerSelection}!`);
-//     return;
-// }
-
-// //declare function that adjusts score
-// function adjustScore(winner, score){
-//     if (winner == "player"){
-//         score[0] += 1;
-//         return score;
-//     } else if (winner == "computer") {
-//         score[1] += 1;
-//         return score;
-//     }
-//     score[2] += 1;
-//     return score;
-// }
-
-// //declare function that displays final score
-// function displayFinalScore(score){
-//     if (score[0] > score[1]){
-//         console.log(`Final score - You:${score[0]} Computer:${score[1]}. You win!`);
-//         return;
-//     } else if (score[0] < score[1]){
-//         console.log(`Final score - You:${score[0]} Computer:${score[1]}. You lose!`);
-//         return;
-//     }
-//     console.log(`Final score - You:${score[0]} Computer:${score[1]}. It's a tie!`);
-//     return;
-// }
-
-// //declare five-round game function
-// function game() {
-//     let score = [0,0,0]
-//     for (let i = 0; i < 5; i++){
-//         //get player selection
-//         let playerSelection = getPlayerSelection();
-//         console.log(playerSelection);
-
-//         //get computer selection
-//         let computerSelection = getComputerSelection();
-//         console.log(computerSelection);
-
-//         //get winner
-//         let winner = comparePlayerToComputer(playerSelection, computerSelection);
-
-//         //display winner
-//         displayWinner(winner, playerSelection, computerSelection);
-
-//         //adjust score
-//         score = adjustScore(winner, score);
-//     }
-//     //display final score
-//     displayFinalScore(score);
-// }
-
-//play game
-// game();
 
 
 
